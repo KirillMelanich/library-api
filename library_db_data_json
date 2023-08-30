@@ -1,0 +1,69 @@
+[
+{
+  "model": "user.customer",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$2qeAvXES7bDb7HVXx5DbEH$soVT4ZsvcE64Ywn1UVhxLM9WZdPrKovD6T7o/RduNWQ=",
+    "last_login": "2023-03-23T19:17:43Z",
+    "is_superuser": true,
+    "first_name": "Admin user",
+    "last_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-03-23T19:17:24Z",
+    "email": "admin@example.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "user.customer",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$QleaitZI3eYWh8p5LLLduT$B8ytngPV+4aEMD47qCtRiE3ZkYrmck1N4xrKZ2mx4ME=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "John",
+    "last_name": "Doe",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-03-23T19:28:40.298Z",
+    "email": "user@example.com",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+    "model": "book.book",
+    "pk": 1,
+    "fields": {
+        "title": "The Lord of the Rings",
+        "author": "J.R.R. Tolkien",
+        "cover": 1,
+        "inventory": 9,
+        "daily_fee": "1.00"
+    }
+},
+{
+    "model": "book.book",
+    "pk": 2,
+    "fields": {
+        "title": "Harry Potter and the Philosopher's Stone",
+        "author": "J.K. Rowling",
+        "cover": 2,
+        "inventory": 20,
+        "daily_fee": "2.00"
+    }
+},
+{
+    "model": "borrowing.borrowing",
+    "pk": 1,
+    "fields": {
+        "borrow_date": "2023-04-05",
+        "expected_return_date": "2023-04-12",
+        "actual_return_date": null,
+        "book": 1,
+        "user": 2
+    }
+}
+]
