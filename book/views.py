@@ -1,7 +1,9 @@
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from book.models import Book
+from book.permissions import IsAdminOrReadOnly
 from book.serializers import (
     BookSerializer,
     BookListSerializer,
@@ -17,6 +19,8 @@ class BookPagination(PageNumberPagination):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAdminOrReadOnly,)
     pagination_class = BookPagination
 
     def get_serializer_class(self):
