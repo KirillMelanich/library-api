@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
@@ -35,7 +37,7 @@ class BorrowingCreateSerializer(serializers.ModelSerializer):
 
         book = get_object_or_404(Book, id=attrs["book"].id)
         if book.inventory == 0:
-            raise ValidationError(f"Book is out of stock (book_id={book.id})")
+            raise ValidationError("Book is out of stock")
 
         return data
 
@@ -46,3 +48,23 @@ class BorrowingCreateSerializer(serializers.ModelSerializer):
             "expected_return_date",
             "book",
         )
+
+
+class BorrowingReturnSerializer(serializers.ModelSerializer):
+    actual_return_date = serializers.DateField(
+        required=True, initial=datetime.date.today
+    )
+
+    def validate(self, attrs):
+        data = super().validate(attrs=attrs)
+        pk = self.context.get("view").kwargs.get("pk")
+        borrowing = get_object_or_404(Borrowing, id=pk)
+
+        if borrowing.actual_return_date is not None:
+            raise ValidationError("The book has already been returned by user")
+
+        return data
+
+    class Meta:
+        model = Borrowing
+        fields = ("actual_return_date",)
