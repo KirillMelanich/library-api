@@ -1,6 +1,6 @@
+from drf_spectacular.utils import extend_schema_view, extend_schema
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from book.models import Book
 from book.permissions import IsAdminOrReadOnly
@@ -16,10 +16,30 @@ class BookPagination(PageNumberPagination):
     max_page_size = 100
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary="List all books",
+        description="Get a paginated list of all books",
+    ),
+    create=extend_schema(
+        summary="Create a new book", description="Create a new book"
+    ),
+    retrieve=extend_schema(
+        summary="Retrieve a book",
+        description="Get detailed information about a book",
+    ),
+    update=extend_schema(summary="Update a book", description="Update a book"),
+    partial_update=extend_schema(
+        summary="Partially update a book",
+        description="Update one or more fields of a book",
+    ),
+    destroy=extend_schema(
+        summary="Delete a book", description="Delete a book"
+    ),
+)
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
+    queryset = Book.objects.order_by("title", "author")
     serializer_class = BookSerializer
-    authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAdminOrReadOnly,)
     pagination_class = BookPagination
 
