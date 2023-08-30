@@ -9,10 +9,10 @@ class Borrowing(models.Model):
     expected_return_date = models.DateField()
     actual_return_date = models.DateField(blank=True, null=True)
     book = models.ForeignKey(
-        Book, on_delete=models.CASCADE, related_name="borrowings"
+        Book, on_delete=models.CASCADE, related_name="borrowing"
     )
     user = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="borrowings"
+        Customer, on_delete=models.CASCADE, related_name="borrowing"
     )
 
     class Meta:

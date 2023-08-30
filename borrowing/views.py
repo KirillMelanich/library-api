@@ -1,4 +1,4 @@
-rom rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins
 
 from borrowing.models import Borrowing
 from borrowing.serializers import (
@@ -18,4 +18,3 @@ class BorrowingViewSet(
             return BorrowingDetailSerializer
 
         return BorrowingSerializer
-
