@@ -12,9 +12,7 @@ from ..serializers import (
 
 
 def create_user():
-    return Customer.objects.create(
-        email="test@example.com", password="pass1234"
-    )
+    return Customer.objects.create(email="test@example.com", password="pass1234")
 
 
 def create_book():

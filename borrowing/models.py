@@ -34,9 +34,7 @@ class Borrowing(models.Model):
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=models.Q(
-                    expected_return_date__gte=models.F("borrow_date")
-                ),
+                check=models.Q(expected_return_date__gte=models.F("borrow_date")),
                 name="check_expected_return_date",
                 violation_error_message="Expected return date should be"
                 " greater or equal then borrow date",

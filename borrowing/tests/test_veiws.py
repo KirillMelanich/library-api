@@ -14,9 +14,7 @@ from ..serializers import (
 
 
 def create_user():
-    return Customer.objects.create(
-        email="test@example.com", password="pass1234"
-    )
+    return Customer.objects.create(email="test@example.com", password="pass1234")
 
 
 def create_book():
@@ -87,9 +85,7 @@ class AdminBorrowingViewSetTests(APITestCase):
         self.assertEqual(response.data["results"][0]["id"], self.borrowing1.id)
 
     def test_retrieve_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-detail", kwargs={"pk": self.borrowing1.id}
-        )
+        url = reverse("borrowing:borrowing-detail", kwargs={"pk": self.borrowing1.id})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -116,9 +112,7 @@ class AdminBorrowingViewSetTests(APITestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_return_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-return", kwargs={"pk": self.borrowing1.id}
-        )
+        url = reverse("borrowing:borrowing-return", kwargs={"pk": self.borrowing1.id})
         payload = {"actual_return_date": "2023-03-28"}
         response = self.client.post(url, data=payload)
 
@@ -173,9 +167,7 @@ class UserBorrowingViewSetTests(APITestCase):
         self.assertEqual(len(response.data["results"]), 0)
 
     def test_retrieve_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-detail", kwargs={"pk": self.borrowing2.id}
-        )
+        url = reverse("borrowing:borrowing-detail", kwargs={"pk": self.borrowing2.id})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -194,9 +186,7 @@ class UserBorrowingViewSetTests(APITestCase):
         response = self.client.post(url, data=payload, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(
-            Borrowing.objects.filter(user=self.user2).count(), 2
-        )
+        self.assertEqual(Borrowing.objects.filter(user=self.user2).count(), 2)
 
         borrowing = Borrowing.objects.last()
         serializer = BorrowingCreateSerializer(borrowing)
@@ -204,9 +194,7 @@ class UserBorrowingViewSetTests(APITestCase):
         self.assertEqual(response.data, serializer.data)
 
     def test_return_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-return", kwargs={"pk": self.borrowing2.id}
-        )
+        url = reverse("borrowing:borrowing-return", kwargs={"pk": self.borrowing2.id})
         payload = {"actual_return_date": "2023-03-28"}
         response = self.client.post(url, data=payload)
 
@@ -230,9 +218,7 @@ class AnonymousBorrowingViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_retrieve_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-detail", kwargs={"pk": self.borrowing.id}
-        )
+        url = reverse("borrowing:borrowing-detail", kwargs={"pk": self.borrowing.id})
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -249,9 +235,7 @@ class AnonymousBorrowingViewSetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_return_borrowing(self):
-        url = reverse(
-            "borrowing:borrowing-return", kwargs={"pk": self.borrowing.id}
-        )
+        url = reverse("borrowing:borrowing-return", kwargs={"pk": self.borrowing.id})
         payload = {"actual_return_date": "2023-03-28"}
         response = self.client.post(url, data=payload)
 

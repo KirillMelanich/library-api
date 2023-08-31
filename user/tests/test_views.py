@@ -15,9 +15,7 @@ class CustomerViewTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(get_user_model().objects.count(), 1)
-        self.assertEqual(
-            get_user_model().objects.get().email, payload["email"]
-        )
+        self.assertEqual(get_user_model().objects.get().email, payload["email"])
 
     def test_manage_unauthenticated_user(self):
         response = self.client.get(MANAGE_URL)

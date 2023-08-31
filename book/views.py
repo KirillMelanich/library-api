@@ -21,9 +21,7 @@ class BookPagination(PageNumberPagination):
         summary="List all books",
         description="Get a paginated list of all books",
     ),
-    create=extend_schema(
-        summary="Create a new book", description="Create a new book"
-    ),
+    create=extend_schema(summary="Create a new book", description="Create a new book"),
     retrieve=extend_schema(
         summary="Retrieve a book",
         description="Get detailed information about a book",
@@ -33,9 +31,7 @@ class BookPagination(PageNumberPagination):
         summary="Partially update a book",
         description="Update one or more fields of a book",
     ),
-    destroy=extend_schema(
-        summary="Delete a book", description="Delete a book"
-    ),
+    destroy=extend_schema(summary="Delete a book", description="Delete a book"),
 )
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.order_by("title", "author")

@@ -72,11 +72,7 @@ class BorrowingViewSet(
             queryset = queryset.filter(actual_return_date__isnull=is_active)
 
         user_id = self.request.query_params.get("user_id")
-        if (
-            user_id is not None
-            and user_id.isdigit()
-            and self.request.user.is_staff
-        ):
+        if user_id is not None and user_id.isdigit() and self.request.user.is_staff:
             queryset = queryset.filter(user_id=int(user_id))
 
         return queryset
@@ -113,16 +109,12 @@ class BorrowingViewSet(
             OpenApiParameter(
                 "is_active",
                 type=OpenApiTypes.BOOL,
-                description=(
-                    "Filter by state of borrowed book (ex. ?is_active=true)"
-                ),
+                description=("Filter by state of borrowed book (ex. ?is_active=true)"),
             ),
             OpenApiParameter(
                 "user_id",
                 type=OpenApiTypes.INT,
-                description=(
-                    "Filter by user id (for admins only) (ex. ?user_id=1)"
-                ),
+                description=("Filter by user id (for admins only) (ex. ?user_id=1)"),
             ),
         ]
     )

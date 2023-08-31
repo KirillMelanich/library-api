@@ -27,8 +27,7 @@ class CreateCustomerView(generics.CreateAPIView):
     ),
     patch=extend_schema(
         summary="Partial update the current user",
-        description="Partial update credentials of the current authenticated "
-                    "user.",
+        description="Partial update credentials of the current authenticated " "user.",
     ),
 )
 class ManageCustomerView(generics.RetrieveUpdateAPIView):

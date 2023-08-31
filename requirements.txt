@@ -26,3 +26,4 @@ sqlparse==0.4.4
 tzdata==2022.7
 uritemplate==4.1.1
 urllib3==1.26.15
+Black==23.7.0

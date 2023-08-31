@@ -56,9 +56,7 @@ class BorrowingCreateSerializer(serializers.ModelSerializer):
                 book = get_object_or_404(Book, id=instance.book.id)
 
                 if book.inventory == 0:
-                    raise serializers.ValidationError(
-                        "The book is out of stock"
-                    )
+                    raise serializers.ValidationError("The book is out of stock")
 
                 book.inventory -= 1
                 book.save()
